@@ -9,7 +9,9 @@ using TableView
 #ENV["GUROBI_HOME"] = "C:/gurobi950/win64"
 #Pkg.build("Gurobi") # verifica se instalacao esta ok
 var_plot=1
+
 ## Definicao de variaveis
+
 # Dimensoes do pallete -----------------------------------------------
 # Width (W) - largura
 # Length (L)- comprimento
@@ -27,6 +29,7 @@ df_dados_caixas = DataFrame(CSV.File("C:/Users/mizus/OneDrive/Área de Trabalho/
 # for i in 1:factorial(length(d_c))
 #     ary_posicoes=[ary_posicoes;transpose(append!([i],collect(nthperm(d_c,i))))]
 # end
+
 ary_posicoes=Array{Int64}(undef, 0, 4)
 # ary_posicoes=df_dados_caixas[:,1:4]
 ary_posicoes=df_dados_caixas[2:end, ["index","comprimento","largura","altura"]]
@@ -282,7 +285,7 @@ showtable(df_coord_Cpqr)
 print(model_1)
 print(model_2)
 
-# Restricoes de quantidade
+# Restricoes de quantidade ---------------------
 
 for caixa in df_dados_caixas[2:end,:index]
     vec_res = zeros(Int64, length(df_coord_Cpqr[:,1])) # loop do ponto virtual
@@ -307,8 +310,6 @@ set_time_limit_sec(model_2,100)
 #JuMP.optimize!(model_1)
 JuMP.optimize!(model_2)
 
-
-
 println("Objective value: ", JuMP.objective_value(model_2))
 println(solution_summary(model_2, verbose=true))
 
@@ -317,7 +318,9 @@ df_resultados=DataFrame(
     name = var,
     Value = value.(var),
     )
-# Salva resultados
+
+
+# Salva resultados ---------------------------------
 CSV.write("C:/Users/mizus/OneDrive/Área de Trabalho/Palete Trabalho/resultado_teste_isntancia_1.csv",
   df_resultados,header=true,delim=";")
 # Salva restricoes de sobreposição
