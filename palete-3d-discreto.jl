@@ -21,7 +21,7 @@ var_plot=1
 # Dimensoes da caixa ------------------------------------------
 # d_c = [l, w, h]
 # d_c = [6,4,5]
-df_dados_caixas = DataFrame(CSV.File("C:/Users/mizus/OneDrive/Área de Trabalho/Palete Trabalho/Trabalho Interira/dados_caixas_teste.csv"))
+df_dados_caixas = DataFrame(CSV.File("dados_caixas_teste.csv"))
 
 # Gerar combinacoes de rotacao para cada caixa
 # Retirado desse modelo pois nao precisamos
